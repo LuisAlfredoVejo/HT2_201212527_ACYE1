@@ -55,32 +55,32 @@ CicloGeneral: ;inicia el ciclo que maneja toda la division de las listas
 
         mov ax, [si] ;movemos a ax la lista 1 desde la posicion 0
         mov bl, [di] ;movemos a bl la lista 2 desde la posicion 0
-        div bl ;
+        div bl ;se dividen las listas que estan en ax/bl
 
-        mov residuo, ah
-        cmp residuo, 0h 
-        je segundoCiclo
-        jne tercerCiclo
+        mov residuo, ah ;se almacena el residuo de la division en ah ya que ahi es donde lo manda div
+        cmp residuo, 0h ; verificamos si el residuo es 0 ya que asi se sabe si es divisible o no
+        je segundoCiclo ;si es 0 se salta al ciclo 2
+        jne tercerCiclo ; si es diferente de 0 se salta al ciclo 3
     
-    segundoCiclo:
-        imprimir msg3
-        jmp cuartoCiclo
+    segundoCiclo: ;inicio del ciclo 2
+        imprimir msg3 ;se imprime mensaje "Divisible"
+        jmp cuartoCiclo ;se salta al ciclo 4
     
-    tercerCiclo:
-        imprimir msg4
-        jmp cuartoCiclo
+    tercerCiclo: ;inicio del ciclo 3
+        imprimir msg4 ;se imprime mensaje "No Divisible"
+        jmp cuartoCiclo ;se salta al ciclo 4
 
-    cuartoCiclo:
+    cuartoCiclo: ;inicio del ciclo 4
         inc si
-        inc si
+        inc si ;se incrementa 2 veces si ya que se usa un tipo dw 
         inc di
-        inc di
-        inc cl
+        inc di ;se incrementa 2 veces di ya que se usa un tipo dw
+        inc cl ;se incrementa 1 el contador cl 
 
-        jmp CicloGeneral
+        jmp CicloGeneral ;regresamos al inicio del ciclo que maneja toda la division
     
-    finprimerCiclo:
-        close
+    finprimerCiclo: ;se termina el ciclo 1
+        close ;se cierra el programa con el macro close
 
 begin endp
 end
